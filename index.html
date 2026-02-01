@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>team showcase</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+body{background:#f4f6f9}
+header{background:#0d6efd;color:#fff;padding:60px 0}
+.role-title{border-left:5px solid #0d6efd;padding-left:12px;margin:40px 0 20px;font-weight:600}
+.team-card{border:none;border-radius:12px;transition:.3s}
+.team-card:hover{transform:translatey(-5px);box-shadow:0 12px 25px rgba(0,0,0,.12)}
+.icon{width:70px;height:70px;background:#e7f1ff;color:#0d6efd;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin:20px auto 10px}
+footer{background:#212529;color:#fff;padding:20px 0}
+</style>
+</head>
+
+<body>
+
+<header class="text-center">
+  <div class="container">
+    <h1><i class="fa-solid fa-users"></i> team showcase</h1>
+    <p class="lead">company professionals</p>
+  </div>
+</header>
+
+<div class="container my-4">
+  <div class="card p-3 shadow-sm">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <input type="text" id="searchinput" class="form-control" placeholder="search by name, skill or role">
+      </div>
+      <div class="col-md-6">
+        <select id="categoryselect" class="form-select">
+          <option value="all">all roles</option>
+          <option>frontend developer</option>
+          <option>backend developer</option>
+          <option>full stack developer</option>
+          <option>ui/ux designer</option>
+          <option>hr manager</option>
+          <option>qa engineer</option>
+          <option>devops engineer</option>
+          <option>data analyst</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="container" id="teamcontainer"></section>
+
+<div class="modal fade" id="profilemodal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="modalname"></h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <span class="badge bg-primary mb-2" id="modalrole"></span>
+        <p id="modalbio"></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>id:</b> <span id="modalid"></span></li>
+          <li class="list-group-item"><b>experience:</b> <span id="modalexp"></span></li>
+          <li class="list-group-item"><b>skills:</b> <span id="modalskills"></span></li>
+          <li class="list-group-item"><b>email:</b> <span id="modalemail"></span></li>
+          <li class="list-group-item"><b>permalink:</b> <span id="modallink"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center mt-5">
+  <small>© 2026 team showcase</small>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const team={
+"frontend developer":[
+{id:101,name:"Divya Sri",exp:"3 years",skills:"html css js",bio:"frontend ui developer",email:"divya@company.com",link:"/team/divya"},
+{id:102,name:"Anusha Reddy",exp:"4 years",skills:"bootstrap css",bio:"responsive ui specialist",email:"anusha@company.com",link:"/team/anusha"},
+{id:103,name:"Bhavya Sri",exp:"3 years",skills:"ui performance",bio:"frontend optimization expert",email:"bhavya@company.com",link:"/team/bhavya"},
+{id:104,name:"Kavya Devi",exp:"5 years",skills:"design systems",bio:"ui architecture lead",email:"kavya@company.com",link:"/team/kavya"},
+{id:105,name:"Sneha Rao",exp:"2 years",skills:"accessibility",bio:"junior frontend developer",email:"sneha@company.com",link:"/team/sneha"}
+],
+
+"backend developer":[
+{id:201,name:"Keerthana Rao",exp:"3 years",skills:"apis db",bio:"backend services developer",email:"keerthana@company.com",link:"/team/keerthana"},
+{id:202,name:"Suresh Reddy",exp:"5 years",skills:"node mysql",bio:"api and database expert",email:"suresh@company.com",link:"/team/suresh"},
+{id:203,name:"Harika Devi",exp:"4 years",skills:"php rest api",bio:"server side specialist",email:"harika@company.com",link:"/team/harika"}
+],
+
+"full stack developer":[
+{id:301,name:"Meena Lakshmi",exp:"6 years",skills:"react node",bio:"end to end development",email:"meena@company.com",link:"/team/meena"},
+{id:302,name:"Sowmya Devi",exp:"4 years",skills:"js apis",bio:"modern web apps",email:"sowmya@company.com",link:"/team/sowmya"},
+{id:303,name:"Ajay Varma",exp:"5 years",skills:"mern stack",bio:"full stack engineer",email:"ajay@company.com",link:"/team/ajay"},
+{id:304,name:"Rahul Teja",exp:"3 years",skills:"frontend backend",bio:"application developer",email:"rahul@company.com",link:"/team/rahul"},
+{id:305,name:"Nithya Sri",exp:"2 years",skills:"react basics",bio:"junior full stack dev",email:"nithya@company.com",link:"/team/nithya"}
+],
+
+"ui/ux designer":[
+{id:401,name:"Anitha Devi",exp:"4 years",skills:"figma ux",bio:"design systems specialist",email:"anitha@company.com",link:"/team/anitha"},
+{id:402,name:"Bhavani Sri",exp:"3 years",skills:"wireframes",bio:"user experience designer",email:"bhavani@company.com",link:"/team/bhavani"},
+{id:403,name:"Kavya Reddy",exp:"5 years",skills:"prototyping",bio:"interaction design expert",email:"kavya@company.com",link:"/team/kavya-ui"}
+],
+
+"hr manager":[
+{id:501,name:"Pooja Nair",exp:"7 years",skills:"recruitment",bio:"people operations manager",email:"pooja@company.com",link:"/team/pooja"},
+{id:502,name:"Lakshmi Prasanna",exp:"5 years",skills:"hr policies",bio:"employee engagement lead",email:"lakshmi@company.com",link:"/team/lakshmi"}
+],
+
+"qa engineer":[
+{id:601,name:"Sindhu Priya",exp:"4 years",skills:"automation testing",bio:"quality assurance engineer",email:"sindhu@company.com",link:"/team/sindhu"},
+{id:602,name:"Ramya Sri",exp:"3 years",skills:"manual testing",bio:"test case specialist",email:"ramya@company.com",link:"/team/ramya"},
+{id:603,name:"Navya Devi",exp:"5 years",skills:"performance testing",bio:"quality lead",email:"navya@company.com",link:"/team/navya"}
+],
+
+"devops engineer":[
+{id:701,name:"Sravani Reddy",exp:"5 years",skills:"aws ci/cd",bio:"cloud infrastructure engineer",email:"sravani@company.com",link:"/team/sravani"},
+{id:702,name:"Harsha Varma",exp:"6 years",skills:"monitoring security",bio:"site reliability engineer",email:"harsha@company.com",link:"/team/harsha"}
+],
+
+"data analyst":[
+{id:801,name:"Aishwarya Devi",exp:"4 years",skills:"power bi excel",bio:"data insights specialist",email:"aishwarya@company.com",link:"/team/aishwarya"},
+{id:802,name:"Srilatha Rao",exp:"3 years",skills:"sql reports",bio:"business analyst",email:"srilatha@company.com",link:"/team/srilatha"},
+{id:803,name:"Madhuri Reddy",exp:"5 years",skills:"python analytics",bio:"advanced analyst",email:"madhuri@company.com",link:"/team/madhuri"},
+{id:804,name:"Swapna Devi",exp:"2 years",skills:"excel dashboards",bio:"junior analyst",email:"swapna@company.com",link:"/team/swapna"},
+{id:805,name:"Usha Sri",exp:"6 years",skills:"data strategy",bio:"analytics lead",email:"usha@company.com",link:"/team/usha"}
+]
+};
+
+
+const teamcontainer=document.getElementById("teamcontainer");
+const searchinput=document.getElementById("searchinput");
+const categoryselect=document.getElementById("categoryselect");
+
+function renderteam(){
+const search=searchinput.value.toLowerCase();
+const category=categoryselect.value;
+teamcontainer.innerHTML="";
+Object.keys(team).forEach(role=>{
+if(category!=="all"&&role!==category)return;
+const members=team[role].filter(m=>m.name.includes(search)||m.skills.includes(search)||role.includes(search));
+if(!members.length)return;
+let html=`<h4 class="role-title">${role} (${members.length})</h4><div class="row g-4">`;
+members.forEach(m=>{
+html+=`
+<div class="col-md-4 col-lg-3">
+<div class="card team-card text-center h-100">
+<div class="icon"><i class="fa-solid fa-user"></i></div>
+<div class="card-body">
+<h6>${m.name}</h6>
+<button class="btn btn-outline-primary btn-sm" onclick='openprofile(${JSON.stringify({...m,role})})'>view profile</button>
+</div>
+</div>
+</div>`;
+});
+html+=`</div>`;
+teamcontainer.innerHTML+=html;
+});
+}
+
+function openprofile(m){
+modalname.textContent=m.name;
+modalrole.textContent=m.role;
+modalbio.textContent=m.bio;
+modalid.textContent=m.id;
+modalexp.textContent=m.exp;
+modalskills.textContent=m.skills;
+modalemail.textContent=m.email;
+modallink.textContent=m.link;
+new bootstrap.Modal(profilemodal).show();
+}
+
+searchinput.addEventListener("input",renderteam);
+categoryselect.addEventListener("change",renderteam);
+renderteam();
+</script>
+
+</body>
+</html>
